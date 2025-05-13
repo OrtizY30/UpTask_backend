@@ -30,7 +30,7 @@ import { CorsOptions } from "cors";
 
 export const corsConfig: CorsOptions = {
   origin: function (origin, callback) {
-    const whitelist = [process.env.FRONTEND_URL];
+    const whitelist = [process.env.FRONTEND_URL?.trim()];
 
     // Permitir peticiones sin origin (Postman, Insomnia, servidores internos, etc)
     if (!origin || whitelist.includes(origin)) {
@@ -39,4 +39,8 @@ export const corsConfig: CorsOptions = {
       callback(new Error("Error de CORS"));
     }
   },
+   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 };
+
